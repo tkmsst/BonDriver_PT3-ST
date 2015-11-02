@@ -175,14 +175,25 @@ int CPT3Manager::OpenTuner(BOOL bSate)
 		if( enStatus != PT::STATUS_OK ){
 			return -1;
 		}
-		enStatus = m_EnumDev[iDevID]->pcDevice->Open();
-		if( enStatus != PT::STATUS_OK ){
+		for( int i = 0; i < 5; i++ ){
+			enStatus = m_EnumDev[iDevID]->pcDevice->Open();
+			if( enStatus == PT::STATUS_OK ){
+				break;
+			}
+			m_EnumDev[iDevID]->pcDevice->Close();
+			Sleep(10);
+		}
+		if (enStatus != PT::STATUS_OK){
+			m_EnumDev[iDevID]->pcDevice->Delete();
+			m_EnumDev[iDevID]->pcDevice = NULL;
 			return -1;
 		}
 
 		enStatus = m_EnumDev[iDevID]->pcDevice->InitTuner();
 		if( enStatus != PT::STATUS_OK ){
 			m_EnumDev[iDevID]->pcDevice->Close();
+			m_EnumDev[iDevID]->pcDevice->Delete();
+			m_EnumDev[iDevID]->pcDevice = NULL;
 			return -1;
 		}
 
@@ -192,6 +203,8 @@ int CPT3Manager::OpenTuner(BOOL bSate)
 				enStatus = m_EnumDev[iDevID]->pcDevice->SetTunerSleep(static_cast<PT::Device::ISDB>(j), i, true);
 				if( enStatus != PT::STATUS_OK ){
 					m_EnumDev[iDevID]->pcDevice->Close();
+					m_EnumDev[iDevID]->pcDevice->Delete();
+					m_EnumDev[iDevID]->pcDevice = NULL;
 					return -1;
 				}
 			}
@@ -274,6 +287,14 @@ BOOL CPT3Manager::CloseTuner(int iID)
 		}else{
 			m_EnumDev[iDevID]->bUseS1 = FALSE;
 		}
+	}
+
+	//LNB電源オンでかつISDB_Sチューナーが使われてなければLNB電源をオフにする
+	if( m_EnumDev[iDevID]->bUseS0 == FALSE &&
+		m_EnumDev[iDevID]->bUseS1 == FALSE ){
+			if( m_bUseLNB == TRUE ){
+				m_EnumDev[iDevID]->pcDevice->SetLnbPower(PT::Device::LNB_POWER_OFF);
+			}
 	}
 
 	if( m_EnumDev[iDevID]->bUseT0 == FALSE && 
@@ -387,7 +408,7 @@ BOOL CPT3Manager::CloseChk()
 			}
 		}
 		if( m_EnumDev[i]->bUseS1 == TRUE ){
-			iID = (i<<16) | (PT::Device::ISDB_S<<8) | 0;
+			iID = (i<<16) | (PT::Device::ISDB_S<<8) | 1;
 			if(m_EnumDev[i]->cDataIO.GetOverFlowCount(iID) > 100){
 				OutputDebugString(L"S1 OverFlow Close");
 				CloseTuner(iID);
@@ -454,8 +475,18 @@ int CPT3Manager::OpenTuner2(BOOL bSate, int iTunerID)
 		if( enStatus != PT::STATUS_OK ){
 			return -1;
 		}
-		enStatus = m_EnumDev[iDevID]->pcDevice->Open();
+		for( int i = 0; i < 5; i++ ){
+			enStatus = m_EnumDev[iDevID]->pcDevice->Open();
+			if( enStatus == PT::STATUS_OK ){
+				break;
+			}
+			// PT::STATUS_DEVICE_IS_ALREADY_OPEN_ERRORの場合は考慮しない
+			m_EnumDev[iDevID]->pcDevice->Close();
+			Sleep(10);	// 保険
+		}
 		if( enStatus != PT::STATUS_OK ){
+			m_EnumDev[iDevID]->pcDevice->Delete();
+			m_EnumDev[iDevID]->pcDevice = NULL;
 			return -1;
 		}
 		/*
@@ -475,6 +506,8 @@ int CPT3Manager::OpenTuner2(BOOL bSate, int iTunerID)
 		enStatus = m_EnumDev[iDevID]->pcDevice->InitTuner();
 		if( enStatus != PT::STATUS_OK ){
 			m_EnumDev[iDevID]->pcDevice->Close();
+			m_EnumDev[iDevID]->pcDevice->Delete();
+			m_EnumDev[iDevID]->pcDevice = NULL;
 			return -1;
 		}
 		for (uint32 i=0; i<2; i++) {
@@ -482,6 +515,8 @@ int CPT3Manager::OpenTuner2(BOOL bSate, int iTunerID)
 				enStatus = m_EnumDev[iDevID]->pcDevice->SetTunerSleep(static_cast<PT::Device::ISDB>(j), i, true);
 				if( enStatus != PT::STATUS_OK ){
 					m_EnumDev[iDevID]->pcDevice->Close();
+					m_EnumDev[iDevID]->pcDevice->Delete();
+					m_EnumDev[iDevID]->pcDevice = NULL;
 					return -1;
 				}
 			}
