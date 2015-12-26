@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Common/Util.h"
-#include "../../Common/StringUtil.h"
+#include "../Common/Util.h"
+#include "../Common/StringUtil.h"
 
 typedef struct _SPACE_DATA{
 	wstring wszName;

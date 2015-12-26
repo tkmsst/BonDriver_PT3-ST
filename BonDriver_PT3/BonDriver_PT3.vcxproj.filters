@@ -14,19 +14,11 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="inc">
-      <UniqueIdentifier>{900a135d-3719-4b8b-98e7-4f7934d29057}</UniqueIdentifier>
+      <UniqueIdentifier>{69b20510-dbae-4ff7-a9b3-9477f0a2be33}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common">
-      <UniqueIdentifier>{5081ce6d-0e16-43fb-bcc4-09c8806e4a68}</UniqueIdentifier>
+      <UniqueIdentifier>{6a9fc26e-1ac0-4660-981a-035fc0ca17af}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="small.ico">
-      <Filter>リソース ファイル</Filter>
-    </None>
-    <None Include="PT3Ctrl.ico">
-      <Filter>リソース ファイル</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -35,19 +27,16 @@
     <ClInclude Include="targetver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="BonTuner.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PT3Ctrl.h">
+    <ClInclude Include="IBonDriver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PT3CtrlMain.h">
+    <ClInclude Include="IBonDriver2.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PT3Manager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DataIO.h">
+    <ClInclude Include="ParseChSet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="inc\EARTH_PT3.h">
@@ -62,75 +51,74 @@
     <ClInclude Include="inc\Prefix_Integer.h">
       <Filter>inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\PipeServer.h">
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PT1OutsideCtrlCmdDef.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\PT1CreateCtrlCmdUtil.h">
+    <ClInclude Include="..\Common\PT1SendCtrlCmdUtil.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\PT1OutsideCtrlCmdDef.h">
+    <ClInclude Include="..\Common\ServiceUtil.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\PT1SendCtrlCmdUtil.h">
+    <ClInclude Include="..\Common\StringUtil.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\ServiceUtil.h">
+    <ClInclude Include="..\Common\Util.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\StringUtil.h">
+    <ClInclude Include="..\Common\PipeServer.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\Util.h">
+    <ClInclude Include="..\Common\PT1CreateCtrlCmdUtil.h">
       <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\EX_Buffer.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\EX_Utility.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\OS_Memory.h">
-      <Filter>inc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="PT3Ctrl.cpp">
+    <ClCompile Include="BonDriver_PT3.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="PT3CtrlMain.cpp">
+    <ClCompile Include="dllmain.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="PT3Manager.cpp">
+    <ClCompile Include="BonTuner.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="DataIO.cpp">
+    <ClCompile Include="ParseChSet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\PipeServer.cpp">
+    <ClCompile Include="..\Common\PT1SendCtrlCmdUtil.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\PT1CreateCtrlCmdUtil.cpp">
+    <ClCompile Include="..\Common\ServiceUtil.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\PT1SendCtrlCmdUtil.cpp">
+    <ClCompile Include="..\Common\StringUtil.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\ServiceUtil.cpp">
+    <ClCompile Include="..\Common\Util.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\StringUtil.cpp">
+    <ClCompile Include="..\Common\PipeServer.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\Util.cpp">
+    <ClCompile Include="..\Common\PT1CreateCtrlCmdUtil.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="PT3Ctrl.rc">
+    <ResourceCompile Include="BonDriver_PT3.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\Common\compatibility.manifest">
+      <Filter>リソース ファイル</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>

@@ -1,7 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BonDriver_PT3", "BonDriver_PT3\BonDriver_PT3.vcxproj", "{BF775E2E-70BF-4DAA-ADB7-62D075369AC9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PT3Ctrl", "PT3Ctrl\PT3Ctrl.vcxproj", "{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,14 @@ Global
 		{BF775E2E-70BF-4DAA-ADB7-62D075369AC9}.Release|Win32.Build.0 = Release|Win32
 		{BF775E2E-70BF-4DAA-ADB7-62D075369AC9}.Release|x64.ActiveCfg = Release|x64
 		{BF775E2E-70BF-4DAA-ADB7-62D075369AC9}.Release|x64.Build.0 = Release|x64
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Debug|Win32.Build.0 = Debug|Win32
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Debug|x64.ActiveCfg = Debug|x64
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Debug|x64.Build.0 = Debug|x64
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Release|Win32.ActiveCfg = Release|Win32
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Release|Win32.Build.0 = Release|Win32
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Release|x64.ActiveCfg = Release|x64
+		{DD1A4A96-3CDE-4C86-9F52-F4265E3D4B12}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

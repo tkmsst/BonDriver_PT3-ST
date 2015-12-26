@@ -8,14 +8,14 @@ void InstallService(LPCWSTR lpcwszFilePath, LPCWSTR lpcwszName, LPCWSTR lpcwszVi
 
 	hScm = OpenSCManagerW(0, 0, SC_MANAGER_CONNECT | SC_MANAGER_CREATE_SERVICE);
 	if(hScm == NULL){
-		OutputDebugString(_T("OpenSCManager failed"));
+		OutputDebugString(L"OpenSCManager failed");
 		return ;
 	}
 	hSrv = CreateServiceW(hScm, lpcwszName, lpcwszViewName,
 		SERVICE_ALL_ACCESS, SERVICE_WIN32_OWN_PROCESS|SERVICE_INTERACTIVE_PROCESS, SERVICE_AUTO_START,
 		SERVICE_ERROR_NORMAL, lpcwszFilePath, NULL, NULL, NULL, NULL, NULL);
 	if(hSrv == NULL){
-		OutputDebugString(_T("service install failed"));
+		OutputDebugString(L"service install failed");
 		CloseServiceHandle(hScm);
 		return ;
 	}
@@ -32,24 +32,24 @@ void RemoveService(LPCWSTR lpcwszName)
 
 	hScm = OpenSCManagerW(0, 0, SC_MANAGER_CONNECT);
 	if(hScm == NULL){
-		OutputDebugString(_T("OpenSCManager failed"));
+		OutputDebugString(L"OpenSCManager failed");
 		return ;
 	}
 	hSrv = OpenServiceW(hScm, lpcwszName, DELETE | SERVICE_STOP | SERVICE_QUERY_STATUS);
 	if(hSrv == NULL){
-		OutputDebugString(_T("OpenService failed"));
+		OutputDebugString(L"OpenService failed");
 		CloseServiceHandle(hScm);
 		return ;
 	}
 	if(QueryServiceStatus(hSrv, &stStatus) == FALSE ){
-		OutputDebugString(_T("QueryServiceStatus failed"));
+		OutputDebugString(L"QueryServiceStatus failed");
 		CloseServiceHandle(hSrv);
 		CloseServiceHandle(hScm);
 		return ;
 	}
 	if( stStatus.dwCurrentState != SERVICE_STOPPED ){
 		if( ControlService(hSrv, SERVICE_CONTROL_STOP, &stStatus) == FALSE ){
-			OutputDebugString(_T("ControlService failed"));
+			OutputDebugString(L"ControlService failed");
 			CloseServiceHandle(hSrv);
 			CloseServiceHandle(hScm);
 			return ;
@@ -67,12 +67,12 @@ BOOL IsInstallService(LPCWSTR lpcwszName)
 	SC_HANDLE hSrv = NULL;
 	hScm = OpenSCManagerW(0, 0, SC_MANAGER_CONNECT);
 	if(hScm == NULL){
-		OutputDebugString(_T("OpenSCManager failed"));
+		OutputDebugString(L"OpenSCManager failed");
 		return FALSE;
 	}
 	hSrv = OpenServiceW(hScm, lpcwszName, SERVICE_QUERY_STATUS);
 	if(hSrv == NULL){
-		OutputDebugString(_T("OpenService failed"));
+		OutputDebugString(L"OpenService failed");
 		CloseServiceHandle(hScm);
 		return FALSE;
 	}
@@ -89,12 +89,12 @@ BOOL IsStopService(LPCWSTR lpcwszName)
 	SC_HANDLE hSrv = NULL;
 	hScm = OpenSCManagerW(0, 0, SC_MANAGER_CONNECT);
 	if(hScm == NULL){
-		OutputDebugString(_T("OpenSCManager failed"));
+		OutputDebugString(L"OpenSCManager failed");
 		return FALSE;
 	}
 	hSrv = OpenServiceW(hScm, lpcwszName, SERVICE_QUERY_STATUS);
 	if(hSrv == NULL){
-		OutputDebugString(_T("OpenService failed"));
+		OutputDebugString(L"OpenService failed");
 		CloseServiceHandle(hScm);
 		return FALSE;
 	}
@@ -104,7 +104,7 @@ BOOL IsStopService(LPCWSTR lpcwszName)
 			bRet = TRUE;
 		}
 	}else{
-		OutputDebugString(_T("QueryServiceStatus failed"));
+		OutputDebugString(L"QueryServiceStatus failed");
 	}
 
 	CloseServiceHandle(hSrv);
@@ -119,17 +119,17 @@ BOOL StartServiceCtrl(LPCWSTR lpcwszName)
 	SC_HANDLE hSrv = NULL;
 	hScm = OpenSCManagerW(0, 0, SC_MANAGER_CONNECT);
 	if(hScm == NULL){
-		OutputDebugString(_T("OpenSCManager failed"));
+		OutputDebugString(L"OpenSCManager failed");
 		return FALSE;
 	}
 	hSrv = OpenServiceW(hScm, lpcwszName, SERVICE_START);
 	if(hSrv == NULL){
-		OutputDebugString(_T("OpenService failed"));
+		OutputDebugString(L"OpenService failed");
 		CloseServiceHandle(hScm);
 		return FALSE;
 	}
 	if( StartServiceW(hSrv, 0, NULL) == FALSE ){
-		OutputDebugString(_T("StartService failed"));
+		OutputDebugString(L"StartService failed");
 	}
 
 	CloseServiceHandle(hSrv);
@@ -146,24 +146,24 @@ BOOL StopServiceCtrl(LPCWSTR lpcwszName)
 
 	hScm = OpenSCManagerW(0, 0, SC_MANAGER_CONNECT);
 	if(hScm == NULL){
-		OutputDebugString(_T("OpenSCManager failed"));
+		OutputDebugString(L"OpenSCManager failed");
 		return FALSE;
 	}
 	hSrv = OpenServiceW(hScm, lpcwszName, SERVICE_STOP | SERVICE_QUERY_STATUS);
 	if(hSrv == NULL){
-		OutputDebugString(_T("OpenService failed"));
+		OutputDebugString(L"OpenService failed");
 		CloseServiceHandle(hScm);
 		return FALSE;
 	}
 	if(QueryServiceStatus(hSrv, &stStatus) == FALSE ){
-		OutputDebugString(_T("QueryServiceStatus failed"));
+		OutputDebugString(L"QueryServiceStatus failed");
 		CloseServiceHandle(hSrv);
 		CloseServiceHandle(hScm);
 		return FALSE;
 	}
 	if( stStatus.dwCurrentState != SERVICE_STOPPED ){
 		if( ControlService(hSrv, SERVICE_CONTROL_STOP, &stStatus) == FALSE ){
-			OutputDebugString(_T("ControlService failed"));
+			OutputDebugString(L"ControlService failed");
 			CloseServiceHandle(hSrv);
 			CloseServiceHandle(hScm);
 			return FALSE;
@@ -184,17 +184,17 @@ DWORD GetServiceStatus(LPCWSTR lpcwszName)
 
 	hScm = OpenSCManagerW(0, 0, SC_MANAGER_CONNECT);
 	if(hScm == NULL){
-		OutputDebugString(_T("OpenSCManager failed"));
+		OutputDebugString(L"OpenSCManager failed");
 		return FALSE;
 	}
 	hSrv = OpenServiceW(hScm, lpcwszName, SERVICE_QUERY_STATUS);
 	if(hSrv == NULL){
-		OutputDebugString(_T("OpenService failed"));
+		OutputDebugString(L"OpenService failed");
 		CloseServiceHandle(hScm);
 		return FALSE;
 	}
 	if(QueryServiceStatus(hSrv, &stStatus) == FALSE ){
-		OutputDebugString(_T("QueryServiceStatus failed"));
+		OutputDebugString(L"QueryServiceStatus failed");
 		CloseServiceHandle(hSrv);
 		CloseServiceHandle(hScm);
 		return FALSE;

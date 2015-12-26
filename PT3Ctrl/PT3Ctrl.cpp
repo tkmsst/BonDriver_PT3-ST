@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "PT3Ctrl.h"
 #include "PT3CtrlMain.h"
-#include "../../Common/ServiceUtil.h"
+#include "../Common/ServiceUtil.h"
 
 CPT3CtrlMain g_cMain;
 HANDLE g_hMutex;

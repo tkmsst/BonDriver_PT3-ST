@@ -69,23 +69,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)..\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)..\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)..\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)..\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\Intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -137,6 +137,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)Common\compatibility.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -162,19 +165,22 @@
       <OptimizeReferences>true</OptimizeReferences>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)Common\compatibility.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="PT3Ctrl.ico" />
     <None Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Common\PipeServer.h" />
-    <ClInclude Include="..\..\Common\PT1CreateCtrlCmdUtil.h" />
-    <ClInclude Include="..\..\Common\PT1OutsideCtrlCmdDef.h" />
-    <ClInclude Include="..\..\Common\PT1SendCtrlCmdUtil.h" />
-    <ClInclude Include="..\..\Common\ServiceUtil.h" />
-    <ClInclude Include="..\..\Common\StringUtil.h" />
-    <ClInclude Include="..\..\Common\Util.h" />
+    <ClInclude Include="..\Common\PipeServer.h" />
+    <ClInclude Include="..\Common\PT1CreateCtrlCmdUtil.h" />
+    <ClInclude Include="..\Common\PT1OutsideCtrlCmdDef.h" />
+    <ClInclude Include="..\Common\PT1SendCtrlCmdUtil.h" />
+    <ClInclude Include="..\Common\ServiceUtil.h" />
+    <ClInclude Include="..\Common\StringUtil.h" />
+    <ClInclude Include="..\Common\Util.h" />
     <ClInclude Include="DataIO.h" />
     <ClInclude Include="inc\EARTH_PT3.h" />
     <ClInclude Include="inc\EX_Buffer.h" />
@@ -191,12 +197,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Common\PipeServer.cpp" />
-    <ClCompile Include="..\..\Common\PT1CreateCtrlCmdUtil.cpp" />
-    <ClCompile Include="..\..\Common\PT1SendCtrlCmdUtil.cpp" />
-    <ClCompile Include="..\..\Common\ServiceUtil.cpp" />
-    <ClCompile Include="..\..\Common\StringUtil.cpp" />
-    <ClCompile Include="..\..\Common\Util.cpp" />
+    <ClCompile Include="..\Common\PipeServer.cpp" />
+    <ClCompile Include="..\Common\PT1CreateCtrlCmdUtil.cpp" />
+    <ClCompile Include="..\Common\PT1SendCtrlCmdUtil.cpp" />
+    <ClCompile Include="..\Common\ServiceUtil.cpp" />
+    <ClCompile Include="..\Common\StringUtil.cpp" />
+    <ClCompile Include="..\Common\Util.cpp" />
     <ClCompile Include="DataIO.cpp" />
     <ClCompile Include="PT3Ctrl.cpp" />
     <ClCompile Include="PT3CtrlMain.cpp" />
@@ -210,6 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PT3Ctrl.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\Common\compatibility.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

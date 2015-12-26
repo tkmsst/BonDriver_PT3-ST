@@ -2,7 +2,7 @@
 
 #include "inc/EARTH_PT3.h"
 #include "inc/OS_Library.h"
-#include "../../Common/Util.h"
+#include "../Common/Util.h"
 #include "DataIO.h"
 
 using namespace EARTH;

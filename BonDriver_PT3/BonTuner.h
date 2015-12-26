@@ -6,7 +6,7 @@
 
 
 #include "IBonDriver2.h"
-#include "../../Common/PT1SendCtrlCmdUtil.h"
+#include "../Common/PT1SendCtrlCmdUtil.h"
 #include "ParseChSet.h"
 
 #define BUFF_SIZE (188*256)

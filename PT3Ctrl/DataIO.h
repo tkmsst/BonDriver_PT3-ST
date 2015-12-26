@@ -3,8 +3,8 @@
 #include "inc/EARTH_PT3.h"
 #include "inc/Prefix.h"
 #include "inc/EX_Buffer.h"
-#include "../../Common/PT1OutsideCtrlCmdDef.h"
-#include "../../Common/PipeServer.h"
+#include "../Common/PT1OutsideCtrlCmdDef.h"
+#include "../Common/PipeServer.h"
 
 //#define TRANSFER_SIZE (4096*PT::Device::BUFFER_PAGE_COUNT)
 //#define VIRTUAL_IMAGE_COUNT 4
