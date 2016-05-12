@@ -87,7 +87,7 @@ int CALLBACK CPT3CtrlMain::OutsideCmdCallback(void* pParam, CMD_STREAM* pCmdPara
 	return 0;
 }
 
-//CMD_CLOSE_EXE PT1Ctrl.exeの終了
+//CMD_CLOSE_EXE PT3Ctrl.exeの終了
 void CPT3CtrlMain::CmdCloseExe(CMD_STREAM* pCmdParam, CMD_STREAM* pResParam)
 {
 	pResParam->dwParam = CMD_SUCCESS;
@@ -114,10 +114,16 @@ void CPT3CtrlMain::CmdCloseTuner(CMD_STREAM* pCmdParam, CMD_STREAM* pResParam)
 	int iID;
 	CopyDefData((DWORD*)&iID, pCmdParam->bData);
 	m_cPT3.CloseTuner(iID);
-	Sleep(100);
 	pResParam->dwParam = CMD_SUCCESS;
-	if( m_cPT3.IsFindOpen() == FALSE && m_bService == FALSE){
-		StopMain();
+	if (m_bService == FALSE) {
+		HANDLE h = _CreateMutex(TRUE, PT3_GLOBAL_LOCK_MUTEX);
+		if (m_cPT3.IsFindOpen() == FALSE) {
+			// 今から終了するので問題が無くなるタイミングまで別プロセスの開始を抑制
+			ResetEvent(g_hStartEnableEvent);
+			StopMain();
+		}
+		ReleaseMutex(h);
+		CloseHandle(h);
 	}
 }
 

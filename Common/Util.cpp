@@ -130,12 +130,11 @@ void _OutputDebugString(const TCHAR *format, ...)
 	TCHAR *buff;
 	int length = _vsctprintf(format, params);
 	buff = new TCHAR [length + 1];
-	iResult = _vstprintf_s(buff, length + 1, format, params);
-	buff[length] = '\0';
 	if (buff != NULL) {
+		iResult = _vstprintf_s(buff, length + 1, format, params);
+		buff[length] = _T('\0');
 		OutputDebugString(buff);
 		delete[] buff;
 	}
-
 	va_end(params);
 }

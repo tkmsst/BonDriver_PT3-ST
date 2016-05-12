@@ -34,16 +34,49 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	if( IsInstallService(SERVICE_NAME) == FALSE ){
 		//普通にexeとして起動を行う
-		g_hMutex = _CreateMutex(TRUE, PT1_CTRL_MUTEX);
-		int err = GetLastError();
-		if( g_hMutex != NULL ){
-			if( err != ERROR_ALREADY_EXISTS ) {
-				//起動
-				StartMain(FALSE);
+		HANDLE h = ::OpenMutexW(SYNCHRONIZE, FALSE, PT3_GLOBAL_LOCK_MUTEX);
+		if (h != NULL) {
+			BOOL bErr = FALSE;
+			if (::WaitForSingleObject(h, 100) == WAIT_TIMEOUT) {
+				bErr = TRUE;
 			}
-			::ReleaseMutex(g_hMutex);
-			::CloseHandle(g_hMutex);
+			::ReleaseMutex(h);
+			::CloseHandle(h);
+			if (bErr) {
+				return -1;
+			}
 		}
+
+		g_hStartEnableEvent = _CreateEvent(TRUE, TRUE, PT3_STARTENABLE_EVENT);
+		if (g_hStartEnableEvent == NULL) {
+			return -2;
+		}
+		// 別プロセスが終了処理中の場合は終了を待つ(最大1秒)
+		if (::WaitForSingleObject(g_hStartEnableEvent, 1000) == WAIT_TIMEOUT) {
+			::CloseHandle(g_hStartEnableEvent);
+			return -3;
+		}
+
+		g_hMutex = _CreateMutex(TRUE, PT1_CTRL_MUTEX);
+		if (g_hMutex == NULL) {
+			::CloseHandle(g_hStartEnableEvent);
+			return -4;
+		}
+		if (::WaitForSingleObject(g_hMutex, 100) == WAIT_TIMEOUT) {
+			// 別プロセスが実行中だった
+			::CloseHandle(g_hMutex);
+			::CloseHandle(g_hStartEnableEvent);
+			return -5;
+		}
+
+		//起動
+		StartMain(FALSE);
+
+		::ReleaseMutex(g_hMutex);
+		::CloseHandle(g_hMutex);
+
+		::SetEvent(g_hStartEnableEvent);
+		::CloseHandle(g_hStartEnableEvent);
 	}else{
 		//サービスとしてインストール済み
 		if( IsStopService(SERVICE_NAME) == FALSE ){

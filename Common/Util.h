@@ -17,6 +17,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <deque>
 #endif
 using namespace std;
 #include <TCHAR.h>

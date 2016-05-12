@@ -1,6 +1,7 @@
 #ifndef __SERVICE_UTIL_H__
 #define __SERVICE_UTIL_H__
 
+#include <tchar.h>
 #include <Winsvc.h>
 
 void InstallService(LPCWSTR lpcwszFilePath, LPCWSTR lpcwszName, LPCWSTR lpcwszViewName);

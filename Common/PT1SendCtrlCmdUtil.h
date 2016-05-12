@@ -13,6 +13,6 @@ DWORD SendOpenTuner2(BOOL bSate, int iTunerID, int* piID, DWORD dwConnectTimeOut
 DWORD SendCloseTuner(int iID, DWORD dwConnectTimeOut = CONNECT_TIMEOUT);
 DWORD SendSetCh(int iID, DWORD dwCh, DWORD dwTSID, DWORD dwConnectTimeOut = CONNECT_TIMEOUT);
 DWORD SendGetSignal(int iID, DWORD* pdwCn100, DWORD dwConnectTimeOut = CONNECT_TIMEOUT);
-DWORD SendSendData(int iID, BYTE* pbData, DWORD* pdwSize, wstring strEvent, wstring strPipe, DWORD dwConnectTimeOut = CONNECT_TIMEOUT );
+DWORD SendSendData(int iID, BYTE** pbData, DWORD* pdwSize, wstring strEvent, wstring strPipe, DWORD dwConnectTimeOut = CONNECT_TIMEOUT );
 
 #endif

@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include "targetver.h"
-
 #define WIN32_LEAN_AND_MEAN             // Windows ヘッダーから使用されていない部分を除外します。
 // Windows ヘッダー ファイル:
 #include <windows.h>
@@ -19,3 +17,6 @@
 
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください。
+#define PT3_GLOBAL_LOCK_MUTEX L"PT3_GLOBAL_LOCK_MUTEX"
+#define PT3_STARTENABLE_EVENT L"Global\\PT3StartEnableEvent"
+extern HANDLE g_hStartEnableEvent;
