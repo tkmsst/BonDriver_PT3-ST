@@ -1,6 +1,6 @@
 BonDriver_PT3-ST
 
-PT3のSDKバージョン0.9用のBonDriverです。複数プロセスから扱えます。
+PT3のSDKバージョン4.0用のBonDriverです。複数プロセスから扱えます。
 
 
 ●ファイル構成
@@ -39,7 +39,8 @@ PT3のSDKバージョン0.9用のBonDriverです。複数プロセスから扱えます。
 　　　　設定ファイル
 
 ●使い方
-PT3 SDKバージョン0.9がインストールされている環境が必須。
+Microsoft Visual C++ 2015再頒布可能パッケージと
+PT3 SDKバージョン4.0がインストールされている環境が必須。
 
 各種アプリのBonDriver配置場所にモジュール一式（PT3Ctrl.exe、
 BonDriver_PT3-S.dll、BonDriver_PT3-T.dll、BonDriver_PT3-ST.ini、
@@ -160,12 +161,19 @@ PT3Ctrl.exeがPT3制御プロセスとなります。
 商用、シェアウェアなどに組み込むのは不可です。
 再配布を行う場合は配布者個人の責任で行ってください。
 
+●生成されるバイナリファイルについて
+BonDriverのバイナリファイルはS用もT用も同一です。
+名前が「BonDriver_PT3-T.dll」あるいは「BonDriver_PT3-Tx.dll」の場合はT用
+として、「BonDriver_PT3-S.dll」あるいは「BonDriver_PT3-Sx.dll」の場合はS用
+として動作するので、dllファイルをコピーし、名前を変更して使用して下さい。
+
 ●64bitOSへの対応
 　x64フォルダにあるモジュールは64bitでビルドしたモジュールになっています。
 　64bit版を使用するにはアプリ側も64bitでビルドされている必要があります。
 　32bitのモジュールが１つでも必要な場合は使用できません。
 
 ■更新履歴
+最新の履歴はGitHubを参照してください。
 12/07/15 お試し人柱版４
 ・SDK 0.96対応
 ・内部処理調整
@@ -180,6 +188,6 @@ PT3Ctrl.exeがPT3制御プロセスとなります。
 ・x64版はまだドライバがないので動作未確認
 
 動作確認環境
-Windows7 Ultimate 32bit
+Windows 10 Professional 64bit
 
 EpgDataCap_Bon
